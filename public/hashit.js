@@ -1,3 +1,5 @@
+// const password = "Bhargav$2105";
+
 function hashIt(password) {
     let newpassord = "";
     for (var i = 0; i < password.length; i++) {
@@ -5,5 +7,5 @@ function hashIt(password) {
     }
     return newpassord;
 }
-
+// console.log(hashIt());
 module.exports = hashIt;
