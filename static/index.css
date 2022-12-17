@@ -228,7 +228,8 @@ input[type=submit]:not([disabled]):active {
     position: absolute;
 }
 
-@keyframes jumping {
+
+/* @keyframes jumping {
     0% {
         transform: translateY(-7px);
     }
@@ -238,7 +239,7 @@ input[type=submit]:not([disabled]):active {
     100% {
         transform: translateY(-7px);
     }
-}
+} */
 
 .formpage::after {
     position: absolute;
