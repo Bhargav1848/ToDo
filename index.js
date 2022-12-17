@@ -25,7 +25,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.set("view engine", "ejs");
 
 //*connecting with database
-const conn = database("Project");
+const conn = database("byrnbofcdwa2cgouqo28");
 
 //? ****** Home Route ******
 app.get("/", (req, res) => {
@@ -91,7 +91,7 @@ app.post("/register", (req, res) => {
                 conn.query(query, data, (err, result) => {
                     if (err) console.log(err);
                     else {
-                        let q2 = `CREATE TABLE project.\`${username}\` (Id INT(255) NOT NULL AUTO_INCREMENT , Description VARCHAR(255) NOT NULL , Assigned_On VARCHAR(255) NOT NULL , Deadline VARCHAR(255) NOT NULL ,Status BOOLEAN NOT NULL,PRIMARY KEY (Id) )`;
+                        let q2 = `CREATE TABLE byrnbofcdwa2cgouqo28.\`${username}\` (Id INT(255) NOT NULL AUTO_INCREMENT , Description VARCHAR(255) NOT NULL , Assigned_On VARCHAR(255) NOT NULL , Deadline VARCHAR(255) NOT NULL ,Status BOOLEAN NOT NULL,PRIMARY KEY (Id) )`;
                         conn.query(q2, (err, result) => {
                             if (err) throw err;
                             console.log(username + " Table Created");
