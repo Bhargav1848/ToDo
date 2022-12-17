@@ -8,6 +8,7 @@
     <title>Home Page</title>
     <link rel="stylesheet" href="../static/index.css" />
     <script type="module" src="../public/alert.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
 </head>
 
 <body>
@@ -303,6 +304,18 @@
 <script>
     function func(id) {
         window.location.href = "/status/" + id;
+    }
+
+    function func2() {
+        var ele = document.getElementById("sideBar");
+        var side = document.getElementById("side1");
+        if (ele.style.width == "20px") {
+            side.style.display = "block";
+            ele.style.width = "300px";
+        } else {
+            side.style.display = "none";
+            ele.style.width = "20px";
+        }
     }
 </script>
 

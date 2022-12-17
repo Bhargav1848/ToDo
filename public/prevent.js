@@ -1,5 +1,5 @@
 function prevent(str) {
-    let newStr = str;
+    let newStr = str.replace(/=/g, "-");
     return newStr;
 }
 

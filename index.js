@@ -9,11 +9,13 @@ const database = require("./public/database"); //? connecting database
 const prevent = require("./public/prevent");
 const hashIt = require("./public/hashit");
 const alertIt = require("./public/alert");
+
 const auth = {
     id: "",
     username: "",
     authenticated: false,
 };
+
 //*initializing app
 app = express();
 
@@ -79,23 +81,29 @@ app.post("/register", (req, res) => {
 
     let q1 = `SELECT id FROM users WHERE username='${username}'`;
     conn.query(q1, (err, result) => {
-        if (result.length != 0) {
-            res.render("register", { err: "User Already Exist" });
-            return;
-        }
-    });
-    let data = { username: username, password: password };
-    let query = "INSERT INTO users SET ?";
-    conn.query(query, data, (err, result) => {
-        if (err) console.log(err);
+        if (err) throw err;
         else {
-            let q2 = `CREATE TABLE project.\`${username}\` (Id INT(255) NOT NULL AUTO_INCREMENT , Description VARCHAR(255) NOT NULL , Assigned_On VARCHAR(255) NOT NULL , Deadline VARCHAR(255) NOT NULL ,Status BOOLEAN NOT NULL,PRIMARY KEY (Id) )`;
-            conn.query(q2, (err, result) => {
-                if (err) throw err;
-                console.log(username + " Table Created");
-            });
-            alertIt("Registered Successfuly.. will be redirected to login page", 201);
-            res.redirect("/login");
+            if (result.length != 0) {
+                res.render("register", { err: "User Already Exist" });
+            } else {
+                let data = { username: username, password: password };
+                let query = "INSERT INTO users SET ?";
+                conn.query(query, data, (err, result) => {
+                    if (err) console.log(err);
+                    else {
+                        let q2 = `CREATE TABLE project.\`${username}\` (Id INT(255) NOT NULL AUTO_INCREMENT , Description VARCHAR(255) NOT NULL , Assigned_On VARCHAR(255) NOT NULL , Deadline VARCHAR(255) NOT NULL ,Status BOOLEAN NOT NULL,PRIMARY KEY (Id) )`;
+                        conn.query(q2, (err, result) => {
+                            if (err) throw err;
+                            console.log(username + " Table Created");
+                        });
+                        alertIt(
+                            "Registered Successfuly.. will be redirected to login page",
+                            201
+                        );
+                        res.redirect("/login");
+                    }
+                });
+            }
         }
     });
 });
@@ -242,4 +250,6 @@ app.get("/status/:id", (req, res) => {
 });
 
 //?listening on port number 5020
-app.listen(5020);
+app.listen(5020, () => {
+    console.log("Runnning on => " + `http://localhost:5020/`);
+});

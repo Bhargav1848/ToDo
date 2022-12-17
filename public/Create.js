@@ -1,7 +1,7 @@
 const createItem = (desc, deadline, db) => {
     var currentdate = new Date();
     let uniqueId = 1;
-    if (db.length != 0) {
+    if (db && db.length != 0) {
         uniqueId = db[db.length - 1].id + 1;
     }
     const item = {
