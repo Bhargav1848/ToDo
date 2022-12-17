@@ -295,9 +295,11 @@
                     </div>
                 </center>
                 <center>
-                    <a href="/item">
-                        <input type="submit" value="Add Work" />
-                    </a>
+                    <%if(authenticated){%>
+                        <a href="/item">
+                            <input type="submit" value="Add Work" />
+                        </a>
+                        <%}%>
                 </center>
     </div>
 </body>
