@@ -57,8 +57,9 @@ app.post("/login", (req, res) => {
     password = hashIt(prevent(password));
     let query = `SELECT * FROM users WHERE username='${username}' && password='${password}'`;
     conn.query(query, (err, result) => {
-        if (err) throw err;
-        else if (result.length == 0)
+        if (err) {
+            res.render("login", { err: "Invalid Credentials!" });
+        } else if (result.length == 0)
             res.render("login", { err: "Invalid Credentials!" });
         else {
             auth.authenticated = true;
@@ -81,7 +82,7 @@ app.post("/register", (req, res) => {
 
     let q1 = `SELECT id FROM users WHERE username='${username}'`;
     conn.query(q1, (err, result) => {
-        if (err) throw err;
+        if (err) res.render("register", { err: "User Already Exist" });
         else {
             if (result.length != 0) {
                 res.render("register", { err: "User Already Exist" });
